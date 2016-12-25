@@ -22,6 +22,21 @@ pub struct FWPM_SESSION0 {
     pub kernelMode: BOOL,
 }
 
+#[repr(C)]
+pub struct FWPM_PROVIDER0 {
+    pub providerKey: GUID,
+    pub displayData: FWPM_DISPLAY_DATA0,
+    pub flags: UINT32,
+    pub providerData: FWP_BYTE_BLOB,
+    pub serviceName: *mut wchar_t,
+}
+
+#[repr(C)]
+pub struct FWP_BYTE_BLOB {
+    pub size: UINT32,
+    pub data: *mut UINT8,
+}
+
 extern "system" {
     pub fn FwpmEngineOpen0(
         serverName: *const wchar_t, authnService: UINT32,
