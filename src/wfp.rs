@@ -29,7 +29,7 @@ pub fn open_session() -> Engine {
     let session = FWPM_SESSION0 {
         sessionKey: EMPTY_GUID,
         displayData: display_data,
-        flags: 0,
+        flags: FWPM_SESSION_FLAG_DYNAMIC,
         txnWaitTimeoutInMSec: INFINITE,
         processId: 0,
         sid: ptr::null_mut(),

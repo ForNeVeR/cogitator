@@ -2,6 +2,8 @@
 
 use winapi::*;
 
+pub const FWPM_SESSION_FLAG_DYNAMIC: UINT32 = 0x00000001;
+
 #[repr(C)]
 pub struct FWPM_DISPLAY_DATA0 {
     pub name: *mut wchar_t,
