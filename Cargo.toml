@@ -3,4 +3,7 @@ name = "cogitator"
 version = "0.1.0"
 authors = ["Friedrich von Never <friedrich@fornever.me>"]
 
+links = "fwpuclnt"
+build = "build.rs" # required for links support even if there's no such file
+
 [dependencies]
