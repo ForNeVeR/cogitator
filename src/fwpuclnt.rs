@@ -27,5 +27,9 @@ extern "system" {
         serverName: *const wchar_t, authnService: UINT32,
         authIdentity: *mut SEC_WINNT_AUTH_IDENTITY_W, session: *const FWPM_SESSION0,
         engineHandle: *mut HANDLE,
-   ) -> DWORD;
+    ) -> DWORD;
+
+    pub fn FwpmTransactionBegin0(engineHandle: HANDLE, flags: UINT32) -> DWORD;
+    pub fn FwpmTransactionCommit0(engineHandle: HANDLE) -> DWORD;
+    pub fn FwpmTransactionAbort0(engineHandle: HANDLE) -> DWORD;
 }
