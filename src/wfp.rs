@@ -14,11 +14,14 @@ const EMPTY_GUID: GUID = GUID {
     Data4: [0, 0, 0, 0, 0, 0, 0, 0],
 };
 
-pub fn to_wchar(str : &str) -> Vec<u16> {
+fn to_wchar(str : &str) -> Vec<u16> {
     OsStr::new(str).encode_wide().chain(once(0)).collect()
 }
 
-pub fn open_session() {
+#[derive(Debug)]
+pub struct Engine(pub HANDLE);
+
+pub fn open_session() -> Engine {
     let display_data = FWPM_DISPLAY_DATA0 {
         name: to_wchar("cogitator session").as_mut_ptr(),
         description: ptr::null_mut()
@@ -45,4 +48,6 @@ pub fn open_session() {
     if result != ERROR_SUCCESS {
         panic!("FwpmEngineOpen0 failure: {}", result);
     }
+
+    Engine(engine)
 }

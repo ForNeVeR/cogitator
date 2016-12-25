@@ -5,6 +5,6 @@ mod wfp;
 
 fn main() {
     println!("Setting up the session");
-    wfp::open_session();
-    println!("Session opened successfully");
+    let engine = wfp::open_session();
+    println!("Session opened successfully; engine = {:?}", engine);
 }
