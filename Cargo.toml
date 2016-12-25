@@ -1,9 +1,10 @@
 [package]
 name = "cogitator"
-version = "0.1.0"
+version = "0.0.1"
 authors = ["Friedrich von Never <friedrich@fornever.me>"]
 
 links = "fwpuclnt"
 build = "build.rs" # required for links support even if there's no such file
 
 [dependencies]
+winapi = "0.2.8"
