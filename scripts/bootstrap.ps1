@@ -1,4 +1,4 @@
-param (
+﻿param (
     $WindivertUrl = 'https://reqrypt.org/download/WinDivert-1.1.8-MSVC.zip',
     $WindivertSha256 = 'F21CC27CAAC865798D20BFD4BF9EB1D3FB314A132879D9A120901928C9DB1068',
     $DownloadLocation = "$PSScriptRoot/../windivert"
@@ -15,15 +15,16 @@ function Check-Hash($path, $hash) {
     }
 }
 
+$zipFile = "$DownloadLocation/windivert.zip"
+
 function Ensure-WindivertDownloaded {
-    $zipFile = "$DownloadLocation/windivert.zip"
     if (-not (Test-Path $DownloadLocation -ErrorAction Ignore)) {
         Write-Output "Creating $DownloadLocation"
         New-Item $DownloadLocation -Type Directory | Out-Null
     }
 
     if (Test-Path $zipFile) {
-        Write-Output "$zipFile exists, checking hash..."
+        Write-Output "$zipFile exists, checking hash…"
         if ((Check-Hash $zipFile $WindivertSha256)) {
             Write-Output 'Hash ok'
         } else {
@@ -33,7 +34,7 @@ function Ensure-WindivertDownloaded {
     }
 
     if (-not (Test-Path $zipFile)) {
-        Write-Output "Downloading from $WindivertUrl..."
+        Write-Output "Downloading from $WindivertUrl…"
         Invoke-WebRequest $WindivertUrl -OutFile $zipFile
         if ((Check-Hash $zipFile $WindivertSha256)) {
             Write-Output 'Hash ok'
@@ -43,4 +44,10 @@ function Ensure-WindivertDownloaded {
     }
 }
 
+function Ensure-WindivertUnpacked {
+    Write-Output 'Extracting file contents…'
+    Expand-Archive $zipFile $DownloadLocation 3> $null
+}
+
 Ensure-WindivertDownloaded
+Ensure-WindivertUnpacked
